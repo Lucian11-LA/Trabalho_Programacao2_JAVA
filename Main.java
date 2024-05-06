@@ -84,7 +84,7 @@ public class Main
                 
                     for(int j=0; j<tamanho_x; j++){
                         
-                        if(naColuna &&(cont<palavras.size())){
+                        if(naColuna &&(cont<palavras.size()) && (i==0) && (j==0)){
                             
                             palavra = palavras.get(cont);
                             tamanho_palavra = palavra.length();
@@ -111,11 +111,17 @@ public class Main
                                
                                if(!grelha[i][j].equals(" ")){
                                    while(contaColunas<tamanho_palavra){
-                                        grelha[i][contaColunas] = ""+palavra.charAt(contaColunas);
-                                        contaColunas++;
+                                       grelha[i][contaColunas] = ""+palavra.charAt(contaColunas);
+                                       contaColunas++;
                                    }
                                }
                            } 
+                           
+                           int k = tamanho_palavra;
+                           while(k<tamanho_x){
+                               grelha[i][k] = "*";
+                               k++;
+                           }
                             
                            cont++;  
                         }
