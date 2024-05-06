@@ -45,6 +45,7 @@ public class Main
 		ArrayList <String> palavras = new ArrayList<String>();
 		
 		palavras.add("BANANA");
+                palavras.add("BOLA");
 		palavras.add("ANANÁS");
 		palavras.add("ABACATE");
 		palavras.add("LOENGO");
@@ -75,12 +76,16 @@ public class Main
                 
                 String palavra;
                 int contaLinhas= 0;
+                int contaColunas = 0;
                 
                 for(int i=0; i<tamanho_x; i++){
                     contaLinhas = 0;
+                    contaColunas = 0;
+                
                     for(int j=0; j<tamanho_x; j++){
                         
-                        if(naColuna && (i==0) && (j==0)){
+                        if(naColuna &&(cont<palavras.size())){
+                            
                             palavra = palavras.get(cont);
                             tamanho_palavra = palavra.length();
                             
@@ -96,13 +101,28 @@ public class Main
                                 k++;
                             }
                             
-                            naColuna = false;
+                            
                             cont++;
-                        }else if(naLinha){
-                        
+                        }else if(naLinha && (cont<palavras.size())){
+                           palavra = palavras.get(cont);
+                           tamanho_palavra = palavra.length();
+                            
+                           if(!(grelha[i][j].equals("*"))){
+                               
+                               if(!grelha[i][j].equals(" ")){
+                                   while(contaColunas<tamanho_palavra){
+                                        grelha[i][contaColunas] = ""+palavra.charAt(contaColunas);
+                                        contaColunas++;
+                                   }
+                               }
+                           } 
+                            
+                           cont++;  
                         }
                             
                         
+                        naColuna = !(naColuna);
+                        naLinha = !(naLinha);
                     }
                                     
                 }
