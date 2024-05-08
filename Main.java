@@ -2,6 +2,16 @@ import java.util.*;
 import java.time.LocalDateTime;
 import java.time.format.DateTimeFormatter;
 
+class Celulas{
+    String pos;
+    int tamanho;
+}
+class Palavras{
+    String valor;
+    int tamanho;
+    
+}
+
 public class Main
 {
     public static void mostrarUsuarioDataPontos(String User,int pontos){
@@ -43,7 +53,9 @@ public class Main
 		
 		
 		ArrayList <String> palavras = new ArrayList<String>();
-		
+                ArrayList <Celulas> pontos = new ArrayList<Celulas>();
+                ArrayList<Celulas>  celulas= new ArrayList<Celulas>();
+                
 		palavras.add("BANANA");
                 palavras.add("BOLA");
 		palavras.add("ANANÁS");
@@ -53,86 +65,54 @@ public class Main
 
 		
                 
-                String[][] grelha = new String[tamanho_x][tamanho_y];
-                            
+                //String[][] grelha = new String[tamanho_x][tamanho_y];
+                 String[][] grelha ={
+                     {"#","#","#","#","#","#","#","#","#","#"},
+                     {"#","#","#","#",".",".",".",".","#","#"},
+                     {"#","#",".","#","#","#","#","#","#","#"},
+                     {"#","#",".","#","#","#","#","#","#","#"},
+                     {"#","#",".","#","#","#","#","#","#","#"},
+                     {"#","#",".","#",".",".",".",".",".","#"},
+                     {"#","#",".","#","#","#","#","#","#","#"},
+                     {"#","#","#","#","#","#","#","#","#","#"},
+                     {"#","#","#","#","#","#","#","#","#","#"},
+                     {"#","#","#","#","#","#","#","#","#","#"}
+                         
+                       
+                       
+                 };       
                             
                                 
-                //CRIAR Grelha de letra
+                //Numerar Grelha de letra
+                
                 for(int i=0; i<tamanho_x; i++){
                     for(int j=0; j<tamanho_x; j++){
-                        grelha[i][j] = i+""+j;
+                        if(!grelha[i][j].equals("#")){
+                            grelha[i][j] = i+""+j;
+                            Celulas cel = new Celulas();
+                            celulas.add(cel);
+                            
+                            int cont = 0;
+                            while(cont< palavras.get(i).length()){
+                                
+                            }
+                            
+                        }
+                            
+                        
+                        
                     }
                                     
                 }
+                
+                
                                 
                 ///
                 
                 //Inserir Palavras
+               
                 
-                boolean naColuna = true;
-                boolean naLinha  = false;
-                int cont = 0;
-                int tamanho_palavra = 0;
-                
-                String palavra;
-                int contaLinhas= 0;
-                int contaColunas = 0;
-                
-                for(int i=0; i<tamanho_x; i++){
-                    contaLinhas = 0;
-                    contaColunas = 0;
-                
-                    for(int j=0; j<tamanho_x; j++){
-                        
-                        if(naColuna &&(cont<palavras.size()) && (i==0) && (j==0)){
-                            
-                            palavra = palavras.get(cont);
-                            tamanho_palavra = palavra.length();
-                            
-                            while(contaLinhas<tamanho_palavra){
-                                grelha[contaLinhas][j] = ""+palavra.charAt(contaLinhas);
-                                contaLinhas++;
-                            }
-                            
-                            
-                            int k = tamanho_palavra;
-                            while(k<tamanho_x){
-                                grelha[k][j] = "*";
-                                k++;
-                            }
-                            
-                            
-                            cont++;
-                        }else if(naLinha && (cont<palavras.size())){
-                           palavra = palavras.get(cont);
-                           tamanho_palavra = palavra.length();
-                            
-                           if(!(grelha[i][j].equals("*"))){
-                               
-                               if(!grelha[i][j].equals(" ")){
-                                   while(contaColunas<tamanho_palavra){
-                                       grelha[i][contaColunas] = ""+palavra.charAt(contaColunas);
-                                       contaColunas++;
-                                   }
-                               }
-                           } 
-                           
-                           int k = tamanho_palavra;
-                           while(k<tamanho_x){
-                               grelha[i][k] = "*";
-                               k++;
-                           }
-                            
-                           cont++;  
-                        }
-                            
-                        
-                        naColuna = !(naColuna);
-                        naLinha = !(naLinha);
-                    }
-                                    
-                }
-                
+                //
                 
 		int op;
 		
@@ -170,17 +150,16 @@ public class Main
                                 System.out.print("\n");
                                 
                                 for(int i=0; i<tamanho_x; i++){
-                                    for(int j=0; j<tamanho_x; j++){
-                                       
-                                        System.out.print("| "+grelha[i][j]+" ");
+                                    for(int j=0; j<tamanho_x; j++){    
+                                        System.out.print(" "+grelha[i][j]+" ");
                                     }
                                     System.out.print("\n");
                                 }
                                 System.out.print("\n");
                                 System.out.print("\n");
-                                //
+                                
 		                
-		                
+		                ////
 		                
 		                System.out.print("Posiçao X: ");
 		                px = input.nextInt();
@@ -215,7 +194,7 @@ public class Main
                                 for(int i=0; i<tamanho_x; i++){
                                     for(int j=0; j<tamanho_x; j++){
                                        
-                                        System.out.print("| "+grelha[i][j]+" ");
+                                        System.out.print(grelha[i][j]+" ");
                                     }
                                     System.out.print("\n");
                                 }
