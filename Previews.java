@@ -1,4 +1,14 @@
-package prog2project;
+/*
+ * Click nbfs://nbhost/SystemFileSystem/Templates/Licenses/license-default.txt to change this license
+ * Click nbfs://nbhost/SystemFileSystem/Templates/Classes/Main.java to edit this template
+ */
+package prog2projecto;
+
+/**
+ *
+ * @author lenevo
+ */
+
 
 import java.util.*;
 
@@ -6,6 +16,7 @@ class Celula
 {
     String valor;
     String posicao;
+    
 }
 
 class Palavras
@@ -13,7 +24,7 @@ class Palavras
     int tamanho;
     String valor;
 }
-public class Prog2project {
+public class Prog2projecto{
 
     public static void mostrarMenu() {
         System.out.println("CROSSWORD --- PALAVRAS-CRUZADAS");
@@ -27,7 +38,7 @@ public class Prog2project {
 
     }
 
-    public static void mostrarGrelha(String[][] grelha, int tamanho_x, int tamanho_y) {
+    public static void mostrarGrelhaTeste(String[][] grelha, int tamanho_x, int tamanho_y) {
         for (int i = 0; i < tamanho_x; i++) {
             for (int j = 0; j < tamanho_y; j++) {
                 System.out.print(" " + grelha[i][j] + " ");
@@ -38,6 +49,22 @@ public class Prog2project {
 
         System.out.print("\n");
     }
+    
+    public static void mostrarGrelha(String[][] grelha, int tamanho_x, int tamanho_y) {
+        for (int i = 0; i < tamanho_x; i++) {
+            for (int j = 0; j < tamanho_y; j++) {
+                if(grelha[i][j].equals("#"))
+                    System.out.print(" ");
+                else
+                    System.out.print(" " + grelha[i][j] + " ");
+
+            }
+            System.out.print("\n");
+        }
+
+        System.out.print("\n");
+    }
+
 
     public static void preencherGrelha(String[][] grelha, int tamanho_x, int tamanho_y) {
         for (int i = 0; i < tamanho_x; i++) {
@@ -100,7 +127,7 @@ public class Prog2project {
 
                                 String[][] grelha = {
                                     {"#", "#", "#", "#", "#", "#", "#", "#", "#", "#"},
-                                    {"#", "#", "#", "#", ".", ".", ".", ".", "#", "#"},
+                                    {"#", "#", ".", ".", ".", ".", ".", "#", "#", "#"},
                                     {"#", "#", ".", "#", "#", "#", "#", "#", "#", "#"},
                                     {"#", "#", ".", "#", "#", "#", "#", "#", "#", "#"},
                                     {"#", "#", ".", "#", "#", "#", "#", "#", "#", "#"},
@@ -111,6 +138,50 @@ public class Prog2project {
                                     {"#", "#", "#", "#", "#", "#", "#", "#", "#", "#"}
 
                                 };
+                                
+                                int tentativas = 10;
+                                
+                                ArrayList<Celula> celulas = new ArrayList<Celula>();
+                                
+                                Celula c1 = new Celula();
+                                
+                                c1.valor = "B";
+                                c1.posicao ="12";
+                                
+                                Celula c2 = new Celula();
+                                
+                                c2.valor = "A";
+                                c2.posicao ="13";
+                                
+                                Celula c3 = new Celula();
+                                
+                                c3.valor = "N";
+                                c3.posicao ="14";
+                                
+                                Celula c4 = new Celula();
+                                
+                                c4.valor = "A";
+                                c4.posicao ="15";
+                                
+                                Celula c5 = new Celula();
+                                
+                                c5.valor = "N";
+                                c5.posicao ="16";
+                                
+                                Celula c6 = new Celula();
+                          
+                                c6.valor = "A";
+                                c6.posicao ="17";
+                                
+                                
+                                
+                                celulas.add(c1);
+                                celulas.add(c2);
+                                celulas.add(c3);
+                                celulas.add(c4);
+                                celulas.add(c5);
+                                celulas.add(c6);
+                                
 
                                 //preenchendo a matriz
                                 preencherGrelha(grelha, tamanho_x, tamanho_y);
@@ -120,13 +191,17 @@ public class Prog2project {
                                 System.out.println("Última dica, as palavras em falta nesse nível são nomes de frutas!");
                                 System.out.println("Vamos comçar!");
                                 
+                                mostrarGrelhaTeste(grelha, tamanho_x, tamanho_y);
                                 do{
                                     System.out.print("\n");
+                                    System.out.println("Jogador:Desconhecido---Pontos: "+total_pontos);
                                     mostrarGrelha(grelha, tamanho_x, tamanho_y);
-                                    System.out.print("\n");
                                     
-                                    System.out.print("Letra a inerir:");
+                                    System.out.print("\n");
+                                    System.out.print("\n");
+                                    System.out.print("Letra a inSerir:");
                                     String letra = input.next();
+                                    letra = letra.toUpperCase();
                                     
                                     System.out.print("Posição X: ");
                                     int posicao_x = input.nextInt();
@@ -135,71 +210,50 @@ public class Prog2project {
                                     String pos = ""+posicao_x+""+posicao_y;
                                     
                                     //Inserir Letra
-                                    
-                                    
-                                    String palavra="";
-                                    int aux1=0,aux2=0;
-                                    boolean flag = true;
-                                    for(int i = 0; i<tamanho_x; i++){
-                                        for(int j= 0; j<tamanho_y; j++){
-                                            if(grelha[i][j].equals(pos))
-                                            {
-                                                //Verifica se a posicao está correcta
-                                                int n = 0;
-                                                
-                                                
-                                                while(flag){
-                                                    String posicoes = posicoesArrayList.get(n);
-                                                    if(posicoes.contains(pos))
+                                    boolean encontrou = false;
+                                    for(int i=0;i<tamanho_x;i++){
+                                        for(int j=0;j<tamanho_y;j++){
+                                            
+                                            String end = ""+i+""+j;
+                                            
+                                            if(end.equals(pos)){
+                                                int n = 0; 
+                                                while(n<celulas.size())
+                                                {
+                                                    if(celulas.get(n).posicao.equals(pos))
                                                     {
-                                                        palavra = palavrasArrayLsit.get(n);
-                                                        aux1 = i;
-                                                        aux2 = j;
-                                                        flag = false;
-                                                        
+                                                        //System.out.println("Celula encontrada");
+                                                        if(celulas.get(n).valor.equals(letra))
+                                                        {
+                                                            grelha[posicao_x][posicao_y] = letra;
+                                                            total_pontos +=10;
+                                                            encontrou = true;
+                                                        }
                                                     }
                                                     n++;
                                                 }
-                                                
                                             }
+                                            
                                         }
-                                        
-                                        
-                                    }
-                                    if(!flag){
-                                        char l = letra.charAt(0);
-                                        int i=0;
-                                        boolean f = true;
-                                        do
-                                        {
-                                            if(palavra.charAt(i)==l){
-                                               
-                                                f = false;
-                                            }
-                                            i++;
-                                        }while(f);
-                                        
-                                        if(f){
-                                            System.out.println("A Letra  pertence a esta palvra!");
-                                             grelha[aux1][aux2] = letra;
-                                        }else{
-                                             System.out.println("A Letra não pertence a essa palavra!");
-                                        }
-                                    }else{
-                                        System.out.println("Posição incorrecta");
                                     }
                                     
-                                    
+                                    if(encontrou)
+                                         System.out.println("\nLetra correcta!\n");
+                                    else{
+                                        tentativas--;
+                                        System.out.println("\nTente uma outra letra ou posicao correcta!\n");
+                                    }
                                     //verifica se a letra está coontida na palavra
                                     
                                     
                                     //
-                                    System.out.println("Quer continuar ? Sim/Não");
-                                    String resposta = input.nextLine();
                                     
                                     
-                                    if(resposta.equals("não")){
+                                    if(tentativas>0){
+                                        jogando = true;
+                                    }else{
                                         jogando = false;
+                                        System.out.println("Voce perdeu, tente jogar novamente!");
                                     }
                                     
                                     
